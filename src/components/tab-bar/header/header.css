@@ -1,0 +1,12 @@
+.header {
+    background-color: 'lightblue';
+    display: flex;
+}
+
+.header .tab {
+    flex: 1;
+}
+
+.header .tab-selected {
+    background-color: lightblue;
+}
