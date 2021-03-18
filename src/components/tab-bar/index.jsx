@@ -16,13 +16,18 @@ function TabBar() {
         setTabs(newTabs);
     }
 
+    const onSubmit = (text) => {
+        console.log("On Submit", text);
+        // Todo: Call api to get list
+    }
+
     useEffect(() => {
         console.log("Use effect tab")
     }, [tabs]);
 
     return (
         <div>
-            <Search />
+            <Search submit={onSubmit} />
             <Header tabs={tabs} onSelect={onSelectTab} />
             <Tab />
         </div>
