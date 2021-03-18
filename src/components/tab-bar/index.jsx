@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Tab from './tab'
 import Header from './header'
-import TabConfig from '../../services/config';
-
+import TabConfig from '../../services/config'
+import Search from './search'
 
 function TabBar() {
     const [tabs, setTabs] = useState(TabConfig);
@@ -22,6 +22,7 @@ function TabBar() {
 
     return (
         <div>
+            <Search />
             <Header tabs={tabs} onSelect={onSelectTab} />
             <Tab />
         </div>
