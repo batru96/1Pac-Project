@@ -3,6 +3,7 @@ import Tab from './tab'
 import Header from './header'
 import TabConfig from '../../services/config'
 import Search from './search'
+import { httpGetMethod } from '../../apis'
 
 function TabBar() {
     const [tabs, setTabs] = useState(TabConfig);
@@ -16,9 +17,14 @@ function TabBar() {
         setTabs(newTabs);
     }
 
-    const onSubmit = (text) => {
-        console.log("On Submit", text);
-        // Todo: Call api to get list
+    const onSubmit = async (text) => {
+        try {
+            const response = await httpGetMethod("https://images-api.nasa.gov/search?q=" + text)
+            console.log("Response:", response);
+        } catch (error) {
+            console.log("Get method error:", error);
+            alert(error.reason)
+        }
     }
 
     useEffect(() => {

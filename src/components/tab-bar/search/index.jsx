@@ -10,7 +10,7 @@ function Search({ submit }) {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        if (text.length > 0) {
+        if (text.trim().length > 0) {
             submit(text);
         }
     }
