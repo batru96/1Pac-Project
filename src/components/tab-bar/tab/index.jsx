@@ -1,12 +1,16 @@
 import React from 'react'
 import "./tab.css";
-import Table from "../../table";
+import TabAll from './tab-all';
+import TabLiked from './tab-liked';
+import TabRemoved from './tab-removed';
 
-function Tab({ tab, items }) {
+function Tab({ tab }) {
     if (!tab.selected) return null
     return (
         <div className="tab-content">
-           <Table />
+            {tab.id === "all" && <TabAll />}
+            {tab.id === "liked" && <TabLiked />}
+            {tab.id === "removed" && <TabRemoved />}
         </div>
     )
 }

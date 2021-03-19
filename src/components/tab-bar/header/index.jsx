@@ -8,14 +8,18 @@ function Header({ tabs, onSelect }) {
     }
 
     useEffect(() => {
-        console.log('Use effect header')
+        console.log('Use effect header', tabs)
     }, []);
 
     return (
         <div className='header'>
             {
                 tabs.map(item => (
-                    <button key={item.id} className={_tabClassName(item)} onClick={() => onSelect(item)}>{item.name}</button>
+                    <button
+                        key={item.id}
+                        className={_tabClassName(item)}
+                        onClick={() => onSelect(item)}
+                    >{item.name}</button>
                 ))
             }
         </div>

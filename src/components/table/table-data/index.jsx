@@ -7,11 +7,12 @@ function TableData({ keys, row, actions, handleAction }) {
 
     return (
         <tr>
-            {keys.map(key => <td>{row[key.id]}</td>)}
+            {keys.map(key => <td key={key.id}>{row[key.id]}</td>)}
             <td>
                 {
                     actions?.length > 0 && actions.map(action => (
                         <button
+                            key={'action-' + action + '-' + row.id}
                             type="button"
                             onClick={() => handleAction(action, row)}
                         >{action}</button>
