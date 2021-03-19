@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { httpGetMethod } from '../../../../apis';
+import { ALL_DATA, getStorage, saveStorage } from '../../../../services/storage';
 import Table from '../../../table';
 import Search from '../../search';
 
@@ -29,12 +30,20 @@ function TabAll() {
                 }
                 return {};
             });
+            saveStorage(ALL_DATA, items);
             setItems(items);
         } catch (error) {
             console.log("Get method error:", error);
             alert(error.reason)
         }
     }
+
+    useEffect(() => {
+        const data = getStorage(ALL_DATA);
+        if (data) {
+            setItems(data);
+        }
+    }, []);
 
     return (
         <div>
