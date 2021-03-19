@@ -1,9 +1,12 @@
 import React from 'react'
+import "./tab.css";
+import Table from "../../table";
 
-function Tab() {
+function Tab({ tab, items }) {
+    if (!tab.selected) return null
     return (
-        <div>
-            Tab component
+        <div className="tab-content">
+           <Table />
         </div>
     )
 }

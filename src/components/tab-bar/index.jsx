@@ -35,7 +35,11 @@ function TabBar() {
         <div>
             <Search submit={onSubmit} />
             <Header tabs={tabs} onSelect={onSelectTab} />
-            <Tab />
+            {
+                tabs.map(item => (
+                    <Tab tab={item} />
+                ))
+            }
         </div>
     )
 }

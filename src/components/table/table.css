@@ -1,0 +1,8 @@
+table {
+    width: 100%;
+}
+
+table tr th, table tr td {
+    flex: 1;
+    border: solid 1px;
+}
