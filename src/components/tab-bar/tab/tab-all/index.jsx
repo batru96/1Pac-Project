@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { httpGetMethod } from '../../../../apis';
-import { ALL_DATA, getStorage, saveStorage } from '../../../../services/storage';
+import { ALL_DATA, getStorage, LIKED_DATA, REMOVED_DATA, saveStorage } from '../../../../services/storage';
 import Table from '../../../table';
 import Search from '../../search';
 
@@ -30,25 +30,50 @@ function TabAll() {
                 }
                 return {};
             });
-            saveStorage(ALL_DATA, items);
             setItems(items);
+            saveStorage(LIKED_DATA, []);
+            saveStorage(REMOVED_DATA, []);
         } catch (error) {
             console.log("Get method error:", error);
             alert(error.reason)
         }
     }
 
+    const onHandlePushNewItem = (enumType, newItem) => {
+        const storageItems = getStorage(enumType);
+        if (storageItems && Array.isArray(storageItems)) {
+            storageItems.push(newItem);
+            saveStorage(enumType, storageItems);
+        } else {
+            saveStorage(enumType, [newItem]);
+        }
+    }
+
+    const handleAction = (type, selectedItem) => {
+        const newItems = items.filter(item => item.id !== selectedItem.id);
+        setItems(newItems);   
+        if (type === "Like") {
+            onHandlePushNewItem(LIKED_DATA, selectedItem);
+        } else if (type === "Remove") {
+            onHandlePushNewItem(REMOVED_DATA, selectedItem);
+        }
+    }
+
     useEffect(() => {
         const data = getStorage(ALL_DATA);
-        if (data) {
+        if (data && Array.isArray(data)) {
             setItems(data);
         }
     }, []);
 
+    useEffect(() => {
+        saveStorage(ALL_DATA, items);
+    }, [items])
+
     return (
         <div>
             <Search submit={onSubmit} />
-            <Table config={config} items={items} />
+            <Table config={config} items={items} handleAction={handleAction} />
         </div>
     )
 }

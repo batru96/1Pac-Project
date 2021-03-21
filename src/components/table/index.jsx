@@ -2,12 +2,7 @@ import React from "react";
 import "./table.css";
 import TableData from "./table-data";
 
-function Table({ config, items }) {
-    const handleAction = (type, item) => {
-        console.log("Action type:", type);
-        console.log("Action item:", item);
-    }
-
+function Table({ config, items, handleAction }) {
     return (
         <table>
             <thead>
